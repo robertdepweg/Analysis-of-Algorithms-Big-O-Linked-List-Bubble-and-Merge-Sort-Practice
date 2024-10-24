@@ -44,10 +44,10 @@ class LinkedList:
         self._head.next = old_head
         # Increment the size of the list
         self._size += 1
-        # Ensure that if we are add the very first node to the linked list
-        # that the tail will be pointing to the new node we create.
+        # Ensure that if we are adding the very first node to the linked list,
+        # the tail will be pointing to the new node we create.
         # Otherwise, do nothing.
-        if self._size is 1:
+        if self._size == 1:
             self._tail = self._head
 
     def add_to_back(self, data):
@@ -63,7 +63,7 @@ class LinkedList:
         self._size += 1
         # Check to see if the list was empty. If so, make the head point
         # to the same location as the tail
-        if self._size is 1:
+        if self._size == 1:
             self._head = self._tail
         else:
             old_tail.next = self._tail
@@ -132,3 +132,14 @@ class LinkedList:
 
     def __str__(self):
         """String Method"""
+        return_string = ""
+        # Set up a current node to walk the list
+        # Start it at the head node.
+        current = self._head
+        # Loop through the nodes until we hit None,
+        # which will signify the end of the list.
+        while current is not None:
+            return_string += f"{current.data}{os.linesep}"
+            # Move to the next node
+            current = current.next
+        return return_string
