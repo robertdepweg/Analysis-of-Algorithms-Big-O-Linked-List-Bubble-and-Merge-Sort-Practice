@@ -1,4 +1,5 @@
-# Merge mergeable[lo .. mid] (sorted subarray) with mergeable[mid+1 .. hi] (sorted subarray) using aux[lo .. hi]
+# Merge mergeable[lo .. mid] (sorted subarray) with
+# mergeable[mid+1 .. hi] (sorted subarray) using aux[lo .. hi]
 
 
 def _merge(mergeable, lo, mid, hi):
@@ -27,3 +28,23 @@ def _merge(mergeable, lo, mid, hi):
             mergeable[k] = _aux[i]
             i += 1
     return
+
+    # Constructor
+    def __init__(self):
+        self._aux = []
+
+        # Main entry point to sort
+
+    def sort(self, iter):
+        self._aux = [None for i in range(len(iter))]
+        self._sort(iter, 0, len(iter) - 1)
+
+        # mergesort a[lo..hi] using auxiliary array aux[lo..hi]
+
+    def _sort(self, iter, lo, hi):
+        if hi <= lo:
+            return
+        mid = lo + int((hi - lo) / 2)
+        self._sort(iter, lo, mid)
+        self._sort(iter, mid + 1, hi)
+        self._merge(iter, lo, mid, hi)
