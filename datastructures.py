@@ -143,3 +143,55 @@ class LinkedList:
             # Move to the next node
             current = current.next
         return return_string
+    
+class HashTable:
+    """Basic Hash Table data structure with no collision resolution"""
+
+    PRIME_VALUE = 97
+
+    def __init__(self):
+        """Constructor"""
+        self._values = [None for i in range(self.PRIME_VALUE)]
+        # Below not needed, but used so we can see the keys when we print.
+        self._keys = [None for i in range(self.PRIME_VALUE)]
+
+    def put(self, key, value):
+        """Put something into the hash table"""
+        index_for_value = self.__hash_function(key)
+        self._values[index_for_value] = value
+        self._keys[index_for_value] = key
+
+    def get(self, key):
+        """Get something out from the hash table"""
+        index_for_value = self.__hash_function(key)
+        return self._values[index_for_value]
+    
+    def __hash_function(self, key):
+        """Hash function used to has a key to an index"""
+        try:
+            hash_val = hash(key) % self.PRIME_VALUE
+        except Exception:
+            hash_val = id(key) % self.PRIME_VALUE
+        return hash_val
+    
+    def __str__(self):
+        """String method"""
+        return_string = f"Key   => Value{os.linesep}"
+        return_string += f"---------------{os.linesep}"
+
+        for i in range(self.PRIME_VALUE):
+            if self._values[i] is not None:
+                return_string += f"{self._keys[i]} => {self._values[i]}{os.linesep}"
+        return return_string
+    
+    def show_array(self):
+        """Show underlying array (list)"""
+        return_string = f"Key   => Value{os.linesep}"
+        return_string += f"---------------{os.linesep}"
+
+        for i in range(self.PRIME_VALUE):
+            value = ""
+            if self._values[i] is not None:
+                value = self._values[i]
+            return_string += f"[{i}] => {value}{os.linesep}"
+        return return_string
